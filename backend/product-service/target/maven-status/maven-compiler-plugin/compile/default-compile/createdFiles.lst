@@ -1,0 +1,15 @@
+com\agritrade\product\utils\ApiResponse.class
+com\agritrade\product\ProductServiceApplication.class
+com\agritrade\product\exception\GlobalExceptionHandler.class
+com\agritrade\product\dto\ProductResponseDTO$ProductResponseDTOBuilder.class
+com\agritrade\product\service\impl\ProductServiceImpl.class
+com\agritrade\product\controller\ProductController.class
+com\agritrade\product\dto\ProductResponseDTO.class
+com\agritrade\product\exception\ResourceNotFoundException.class
+com\agritrade\product\model\Product.class
+com\agritrade\product\repository\ProductRepository.class
+com\agritrade\product\client\UserClient.class
+com\agritrade\product\dto\ProductRequestDTO.class
+com\agritrade\product\dto\UserDTO.class
+com\agritrade\product\service\ProductService.class
+com\agritrade\product\utils\ApiResponse$ApiResponseBuilder.class
