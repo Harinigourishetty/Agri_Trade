@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS agritrade_user;
+CREATE DATABASE IF NOT EXISTS agritrade_product;
