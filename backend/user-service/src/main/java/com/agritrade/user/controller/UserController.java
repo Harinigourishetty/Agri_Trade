@@ -42,4 +42,10 @@ public class UserController {
         UserResponseDTO user = userService.getUserByEmail(email);
         return ResponseEntity.ok(ApiResponse.success(user, "User retrieved successfully by email"));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<UserResponseDTO>> login(@RequestBody UserRequestDTO loginRequest) {
+        UserResponseDTO user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        return ResponseEntity.ok(ApiResponse.success(user, "Login successful"));
+    }
 }

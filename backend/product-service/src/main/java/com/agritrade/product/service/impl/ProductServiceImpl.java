@@ -8,6 +8,7 @@ import com.agritrade.product.exception.ResourceNotFoundException;
 import com.agritrade.product.model.Product;
 import com.agritrade.product.repository.ProductRepository;
 import com.agritrade.product.service.ProductService;
+import com.agritrade.product.utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,10 @@ public class ProductServiceImpl implements ProductService {
         // Fetch farmer details via Feign Client
         UserDTO farmer = null;
         try {
-            farmer = userClient.getUserById(product.getFarmerId());
+            ApiResponse<UserDTO> response = userClient.getUserById(product.getFarmerId());
+            if (response != null && response.isSuccess()) {
+                farmer = response.getData();
+            }
         } catch (Exception e) {
             // Handle cases where User Service is down or User doesn't exist
             // In a real app, you might want to log this or return a partial response

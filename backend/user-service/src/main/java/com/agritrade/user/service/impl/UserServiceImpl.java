@@ -53,6 +53,16 @@ public class UserServiceImpl implements UserService {
         return mapToResponseDTO(user);
     }
 
+    @Override
+    public UserResponseDTO loginUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+        if (!user.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Invalid credentials");
+        }
+        return mapToResponseDTO(user);
+    }
+
     private UserResponseDTO mapToResponseDTO(User user) {
         return UserResponseDTO.builder()
                 .id(user.getId())

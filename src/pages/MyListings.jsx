@@ -12,18 +12,22 @@ export default function MyListings() {
 
   const myListings = crops.filter(c => c.farmerName === currentFarmer?.name);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addCropListing({
-      ...newListing,
-      farmerId: currentFarmer?.id,
-      farmerName: currentFarmer?.name,
-      quantity: Number(newListing.quantity),
-      expectedPrice: Number(newListing.expectedPrice)
-    });
-    toast.success("Crop listed successfully!");
-    setShowModal(false);
-    setNewListing({ cropName: "", quantity: "", unit: "Quintal", expectedPrice: "", location: currentFarmer?.location || "" });
+    try {
+      await addCropListing({
+        ...newListing,
+        farmerId: currentFarmer?.id,
+        farmerName: currentFarmer?.name,
+        quantity: Number(newListing.quantity),
+        expectedPrice: Number(newListing.expectedPrice)
+      });
+      toast.success("Crop listed successfully!");
+      setShowModal(false);
+      setNewListing({ cropName: "", quantity: "", unit: "Quintal", expectedPrice: "", location: currentFarmer?.location || "" });
+    } catch (err) {
+      toast.error(err.message || "Failed to publish listing");
+    }
   };
 
   const columns = [

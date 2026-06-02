@@ -12,12 +12,16 @@ export default function Login() {
   const { login } = useAppContext();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      login(role);
-      toast.success(`Welcome back, ${role === 'trader' ? 'Trader' : 'Farmer'}!`);
-      navigate(role === 'trader' ? "/dashboard" : "/farmer-dashboard");
+      try {
+        await login(email, password, role);
+        toast.success(`Welcome back, ${role === 'trader' ? 'Trader' : 'Farmer'}!`);
+        navigate(role === 'trader' ? "/dashboard" : "/farmer-dashboard");
+      } catch (err) {
+        toast.error(err.message || "Login failed");
+      }
     } else {
       toast.error("Please fill in all fields");
     }
